@@ -1,44 +1,46 @@
 import express from "express";
+import ProductManager from "./ProductManager.js";
 
 const app = express();
+const manager = new ProductManager("./src/Productos.json");
 
-const users = [
-  { id: "1", name: "Franco", city: "Londres" },
-  { id: "2", name: "Francisco", city: "Londres" },
-  { id: "3", name: "Maria", city: "Buenos Aires" },
-  { id: "4", name: "Juan" },
-  { id: "5", name: "Pedro" },
-];
+// Ej http://localhost:8080/products
+app.get("/products", async (req, res) => {
+  // Recupero los productos
+  const products = await manager.getProducts();
+  // Muestro todos los productos
+  return res.send(products);
+});
 
-app.get("/users", (req, res) => {
-  //res.json(users);
-  const { city } = req.query;
-  if (city) {
-    res.send(users.filter((u) => u.city === city));
-  } else {
-    res.send(users);
+// Ej http://localhost:8080/productos?limit=3
+app.get("/productos", async (req, res) => {
+  // Obtengo el valor de limit
+  const limit = req.query.limit;
+  // Recupero los productos
+  const products = await manager.getProducts();
+  // Selecciono los N productos
+  let selected = [];
+  for (let i = 0; i < limit; i++) {
+    selected.push(products[i]);
   }
+  // Muestro los productos seleccionados
+  return res.send(selected);
 });
 
-app.get("/users/:id", (req, res) => {
-  const { id } = req.params;
-  const user = users.find((u) => u.id === id);
-  if (!user) {
-    return res
-      .status(404)
-      .send({ error: `No existe el usuario con ID ${req.params.id}` });
+// Ej http://localhost:8080/products/2
+app.get("/products/:id", async (req, res) => {
+  // Obtengo el valor del elemento
+  let id = req.params.id;
+  // Recupero los productos
+  const products = await manager.getProducts();
+  id = id - 1;
+  let selected = products[id];
+  // Muestro el producto seleccionados
+  if (!selected) {
+    res.status(404).send({ message: `No existe el producto con el id ${id}` });
   } else {
-    res.json(user);
+    res.send(products[id]);
   }
-});
-
-app.get("/unparametro/:nombre", (req, res) => {
-  console.log(req.params.nombre);
-  res.send(`Bienvenid@, ${req.params.nombre}`);
-});
-
-app.get("/dosparametros/:nombre/:apellido", (req, res) => {
-  res.send(`Bienvenid@, ${req.params.nombre} ${req.params.apellido}`);
 });
 
 app.listen(8080, () => {

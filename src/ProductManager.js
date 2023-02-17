@@ -1,4 +1,4 @@
-const fs = require("fs");
+import fs from "fs";
 
 class ProductManager {
   #path;
@@ -125,59 +125,7 @@ class ProductManager {
   }
 }
 
-async function main() {
-  // Instancio un objeto de la clase
-  const manager = new ProductManager("./Productos.json");
-  // Muestro los Productos existentes
-  console.log(await manager.getProducts());
-  // Creo el primer Producto
-  await manager.addProduct(
-    "producto prueba",
-    "Este es un producto prueba",
-    200,
-    "Sin imagen",
-    "abc101",
-    25
-  );
-  // Creo un segundo Producto
-  await manager.addProduct(
-    "segundo producto",
-    "Este es otro producto prueba",
-    300,
-    "foto2",
-    "abc102",
-    35
-  );
-  // Muestro los Productos existentes
-  console.log(await manager.getProducts());
-  // Busco un producto por su ID
-  console.log(await manager.getProductById(0));
-  // Intento crear un Producto con un CODE repetido
-  await manager.addProduct(
-    "tercer producto",
-    "Este es otro producto prueba",
-    300,
-    "foto2",
-    "abc102",
-    35
-  );
-  // Actualizo un Producto existente
-  await manager.updateProduct(
-    1,
-    "TítuloActualizado",
-    "DescripciónAcualizada",
-    500,
-    "FOTOActualizada",
-    "abc102",
-    44
-  );
-  // Muestro los Productos existentes
-  console.log(await manager.getProducts());
-  // Borro un producto
-  await manager.deleteProduct(0);
-  // Muestro los Productos existentes
-  console.log(await manager.getProducts());
-}
+async function main() {}
 
 main();
 
