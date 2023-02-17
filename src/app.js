@@ -4,30 +4,28 @@ import ProductManager from "./ProductManager.js";
 const app = express();
 const manager = new ProductManager("./src/Productos.json");
 
-// Ej http://localhost:8080/products
+// Ej http://localhost:8080/products?limit=3 => Primeros tres productos
+// Ej http://localhost:8080/products => Todos los productos
 app.get("/products", async (req, res) => {
   // Recupero los productos
   const products = await manager.getProducts();
-  // Muestro todos los productos
-  return res.send(products);
-});
-
-// Ej http://localhost:8080/productos?limit=3
-app.get("/productos", async (req, res) => {
   // Obtengo el valor de limit
-  const limit = req.query.limit;
-  // Recupero los productos
-  const products = await manager.getProducts();
-  // Selecciono los N productos
-  let selected = [];
-  for (let i = 0; i < limit; i++) {
-    selected.push(products[i]);
+  let limit = req.query.limit;
+  if (!limit) {
+    res.send(products);
+  } else {
+    // Selecciono los N productos
+    let selected = [];
+    for (let i = 0; i < limit; i++) {
+      selected.push(products[i]);
+    }
+    // Muestro los productos seleccionados
+    return res.send(selected);
   }
-  // Muestro los productos seleccionados
-  return res.send(selected);
 });
 
-// Ej http://localhost:8080/products/2
+// Ej http://localhost:8080/products/2 => Prod 2
+// Ej http://localhost:8080/products/3412 => Error
 app.get("/products/:id", async (req, res) => {
   // Obtengo el valor del elemento
   let id = req.params.id;
