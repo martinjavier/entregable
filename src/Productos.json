@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "title": "Primero",
+    "description": "Descripción Primera",
+    "price": 100,
+    "thumbnail": "FOTO1",
+    "code": "abc101",
+    "stock": 100
+  },
+  {
+    "id": 2,
+    "title": "Segundo",
+    "description": "Descripción Segunda",
+    "price": 200,
+    "thumbnail": "FOTO2",
+    "code": "abc102",
+    "stock": 200
+  },
+  {
+    "id": 3,
+    "title": "Tercero",
+    "description": "Descripción Tercera",
+    "price": 300,
+    "thumbnail": "FOTO3",
+    "code": "abc103",
+    "stock": 300
+  },
+  {
+    "id": 4,
+    "title": "Cuarto",
+    "description": "Descripción Cuarta",
+    "price": 400,
+    "thumbnail": "FOTO4",
+    "code": "abc104",
+    "stock": 400
+  },
+  {
+    "id": 5,
+    "title": "Quinto",
+    "description": "Descripción Quinta",
+    "price": 500,
+    "thumbnail": "FOTO5",
+    "code": "abc105",
+    "stock": 500
+  },
+  {
+    "id": 6,
+    "title": "Sexto",
+    "description": "Descripción Sexta",
+    "price": 600,
+    "thumbnail": "FOTO6",
+    "code": "abc106",
+    "stock": 600
+  },
+  {
+    "id": 7,
+    "title": "Septimo",
+    "description": "Descripción Septima",
+    "price": 700,
+    "thumbnail": "FOTO7",
+    "code": "abc107",
+    "stock": 700
+  },
+  {
+    "id": 8,
+    "title": "Octavo",
+    "description": "Descripción Octava",
+    "price": 800,
+    "thumbnail": "FOTO8",
+    "code": "abc108",
+    "stock": 800
+  },
+  {
+    "id": 9,
+    "title": "Noveno",
+    "description": "Descripción Novena",
+    "price": 900,
+    "thumbnail": "FOTO9",
+    "code": "abc109",
+    "stock": 900
+  },
+  {
+    "id": 10,
+    "title": "Décimo",
+    "description": "Descripción Décima",
+    "price": 1000,
+    "thumbnail": "FOTO10",
+    "code": "abc110",
+    "stock": 1000
+  },
+  {
+    "id": 11,
+    "title": "Undécimo",
+    "description": "Descripción Undécima",
+    "price": 1100,
+    "thumbnail": "FOTO11",
+    "code": "abc111",
+    "stock": 1100
+  },
+  {
+    "id": 12,
+    "title": "duodécimo",
+    "description": "Descripción Duodécima",
+    "price": 1200,
+    "thumbnail": "FOTO12",
+    "code": "abc112",
+    "stock": 1200
+  },
+  {
+    "id": 13,
+    "title": "decimotercero",
+    "description": "Descripción Decimotercera",
+    "price": 1300,
+    "thumbnail": "FOTO13",
+    "code": "abc113",
+    "stock": 1300
+  },
+  {
+    "id": 14,
+    "title": "decimocuarto",
+    "description": "Descripción Decimocuarta",
+    "price": 1400,
+    "thumbnail": "FOTO14",
+    "code": "abc114",
+    "stock": 1400
+  }
+]
