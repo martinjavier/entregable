@@ -58,8 +58,8 @@ cartsRouter.post("/", async (req, res) => {
 
 cartsRouter.post("/:cid/product/:pid", async (req, res) => {
   // Recupero los valores del body
-  const cartID = req.body.cid;
-  const prodID = req.body.pid;
+  const cartID = req.params.cid;
+  const prodID = req.params.pid;
   console.log("CartID: " + cartID);
   console.log("ProdID: " + prodID);
   // Recupero los carritos existentes
