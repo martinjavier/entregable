@@ -57,21 +57,52 @@ cartsRouter.post("/", async (req, res) => {
 });
 
 cartsRouter.post("/:cid/product/:pid", async (req, res) => {
-  // Recupero los valores del body
+  // Recupero los valores de params
   const cartID = req.params.cid;
   const prodID = req.params.pid;
-  console.log("CartID: " + cartID);
-  console.log("ProdID: " + prodID);
   // Recupero los carritos existentes
   const carts = await cartsManager.getCarts();
   // Recupero los productos existentes
   const prods = await productsManager.getProducts();
   // Verifico si existe ese cartito
   let verifyCart = carts.find((c) => c.id === cartID);
-  console.log(JSON.stringify(verifyCart));
-  // Verifico si existe ese producto
-  let verifyProd = prods.find((p) => p.id === prodID);
-  console.log(JSON.stringify(verifyProd));
+  if (verifyCart) {
+    // Verifico si existe ese producto
+    let verifyProd = prods.find((p) => p.id === prodID);
+    if (verifyProd) {
+      // Busco el producto dentro del carrito
+      let checkProd = verifyCart.products.find((p) => p.id === prodID);
+      let updatedCart;
+      if (checkProd) {
+        // Si existe el producto obtengo su quantity
+        let { quantity } = JSON.stringify(verifyCart);
+        console.log("Cantidad: " + quantity);
+        /*
+        updatedCart = {
+          "id": cartID,
+          "products": 
+        }
+        */
+      } else {
+        updatedCart = {
+          id: cartID,
+          products: { id: checkProd, quantity: 1 },
+        };
+      }
+
+      console.log(JSON.stringify(verifyCart));
+      // quantity++
+    } else {
+      return res
+        .status(404)
+        .send({ message: `No existe un producto con ID ${prodID}` });
+    }
+  } else {
+    return res
+      .status(404)
+      .send({ message: `No existe un carrito con ID ${cartID}` });
+  }
+
   res.send("POST ESPECIAL");
 
   //let newCart = await cartsManager.addCart(products);

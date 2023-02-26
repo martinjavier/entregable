@@ -2,7 +2,6 @@ import fs from "fs";
 
 class ProductManager {
   #path;
-  #amount = 0;
 
   constructor(path) {
     this.#path = path;
@@ -22,7 +21,6 @@ class ProductManager {
     let newID = uniqueID();
     // Recupero los productos
     const products = await this.getProducts();
-    //console.log("PROD: " + JSON.stringify(products));
     // Verifico si hay un producto con ese CODE
     let verifyCode = products.find((p) => p.code === code);
     if (!verifyCode) {
@@ -40,9 +38,7 @@ class ProductManager {
       };
       try {
         const updatedProducts = [...products, newProduct];
-        // console.log("Updated: " + updatedProducts);
         fs.promises.writeFile(this.#path, JSON.stringify(updatedProducts));
-        this.#amount++;
       } catch (err) {
         console.error(err);
       }
