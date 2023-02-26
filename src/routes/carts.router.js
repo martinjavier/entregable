@@ -75,23 +75,23 @@ cartsRouter.post("/:cid/product/:pid", async (req, res) => {
       let updatedCart;
       if (checkProd) {
         // Si existe el producto obtengo su quantity
-        let { quantity } = JSON.stringify(verifyCart);
-        console.log("Cantidad: " + quantity);
-        /*
+        let quantity = JSON.stringify(checkProd.quantity);
+        // Incremento la cantidad
+        quantity++;
         updatedCart = {
-          "id": cartID,
-          "products": 
-        }
-        */
+          id: cartID,
+          products: {
+            id: checkProd.id,
+            quantity: quantity,
+          },
+        };
       } else {
         updatedCart = {
           id: cartID,
-          products: { id: checkProd, quantity: 1 },
+          products: { id: checkProd.id, quantity: 1 },
         };
       }
-
-      console.log(JSON.stringify(verifyCart));
-      // quantity++
+      // Recorro los carritos y reemplazo
     } else {
       return res
         .status(404)
