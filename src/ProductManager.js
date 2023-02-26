@@ -8,7 +8,18 @@ class ProductManager {
     this.#path = path;
   }
 
-  async addProduct(title, description, price, thumbnail, code, stock) {
+  async addProduct(
+    title,
+    description,
+    code,
+    price,
+    status,
+    stock,
+    category,
+    thumbnails
+  ) {
+    // Obtengo un ID único
+    let newID = uniqueID();
     // Recupero los productos
     const products = await this.getProducts();
     //console.log("PROD: " + JSON.stringify(products));
@@ -17,13 +28,15 @@ class ProductManager {
     if (!verifyCode) {
       // Construyo el nuevo Producto
       const newProduct = {
-        id: this.#amount,
+        id: newID,
         title,
         description,
-        price,
-        thumbnail,
         code,
+        price,
+        status,
         stock,
+        category,
+        thumbnails,
       };
       try {
         const updatedProducts = [...products, newProduct];
@@ -128,5 +141,19 @@ class ProductManager {
 async function main() {}
 
 main();
+
+function uniqueID() {
+  // Calculo un ID único
+  const today = new Date();
+  let day = today.getUTCDay().toString();
+  let month = today.getUTCMonth().toString();
+  let year = today.getFullYear().toString();
+  var hour = today.getUTCHours().toString();
+  var minute = today.getUTCMinutes().toString();
+  var second = today.getUTCSeconds().toString();
+  var milisec = today.getUTCMilliseconds().toString();
+  var myID = (day + month + year + hour + minute + second + milisec).toString();
+  return myID;
+}
 
 export default ProductManager;
