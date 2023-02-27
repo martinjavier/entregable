@@ -56,6 +56,7 @@ cartsRouter.post("/", async (req, res) => {
   res.send(newCart);
 });
 
+// Postman POST http://localhost:8080/api/carts/11202322154781/product/01202318451768
 cartsRouter.post("/:cid/product/:pid", async (req, res) => {
   // Recupero los valores de params
   const cartID = req.params.cid;
@@ -65,42 +66,21 @@ cartsRouter.post("/:cid/product/:pid", async (req, res) => {
   // Recupero los productos existentes
   const prods = await productsManager.getProducts();
   // Verifico si existe ese cartito
-  console.log("Carritos: " + JSON.stringify(carts));
   let verifyCart = carts.find((c) => c.id === cartID);
   if (verifyCart) {
     // Verifico si existe ese producto
     let verifyProd = prods.find((p) => p.id === prodID);
     if (verifyProd) {
-      // Busco el producto dentro del carrito
-      let checkProd = verifyCart.products.find((p) => p.id === prodID);
-      let updatedCart;
-      if (checkProd) {
-        // Si existe el producto obtengo su quantity
-        let quantity = JSON.stringify(checkProd.quantity);
-        // Incremento la cantidad
-        quantity++;
-        updatedCart = {
-          id: cartID,
-          products: {
-            id: checkProd.id,
-            quantity: quantity,
-          },
-        };
-      } else {
-        updatedCart = {
-          id: cartID,
-          products: { id: checkProd.id, quantity: 1 },
-        };
-      }
-      // Recorro los carritos y reemplazo
-      let newCarts = [];
-      for (let i = 0; i < carts.length; i++) {
-        if (carts[i].id != verifyCart) {
-          newCarts.push(carts[i]);
+      let localProducts = verifyCart.products;
+      let cantidad = Object.keys(localProducts).length;
+      for (let i = 0; i < cantidad; i++) {
+        if (localProducts[i].id === prodID) {
+          localProducts[i].quantity++;
+          cartsManager.updateCart(cartID, localProducts);
+          return res.send(cartID);
         }
       }
-      let updateCarts = await cartsManager.addCart(newCarts);
-      return res.send(updateCarts);
+      return res.send(cartID);
     } else {
       return res
         .status(404)
@@ -111,9 +91,13 @@ cartsRouter.post("/:cid/product/:pid", async (req, res) => {
       .status(404)
       .send({ message: `No existe un carrito con ID ${cartID}` });
   }
+});
 
-  //let newCart = await cartsManager.addCart(products);
-  //res.send(newCart);
+cartsRouter.delete("/:cid", async (req, res) => {
+  // Recupero los valores de params
+  const cartID = req.params.cid;
+  let deletedCart = await cartsManager.deleteCart(cartID);
+  res.send(deletedCart);
 });
 
 export default cartsRouter;

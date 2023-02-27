@@ -80,16 +80,11 @@ class CartManager {
     });
   }
 
+  // Postman DELETE http://localhost:8080/api/carts/11202322030908
   async deleteCart(id) {
-    // defino un arreglo vacío
-    let carts = [];
     // llamo al método getProducts
-    const cartsPromise = await this.getCarts();
-    // vuelvo a armar mi arreglo
-    cartsPromise.forEach((oneCart) => {
-      carts.push(oneCart);
-    });
-    // Verifico el campo ID de cada producto existe en el arreglo
+    const carts = await this.getCarts();
+    // Verifico el campo ID de cada carrito existente en el arreglo
     let allExceptOne = [];
     carts.forEach((oneCart) => {
       if (oneCart.id != id) {
