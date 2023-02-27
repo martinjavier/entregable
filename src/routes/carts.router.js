@@ -65,6 +65,7 @@ cartsRouter.post("/:cid/product/:pid", async (req, res) => {
   // Recupero los productos existentes
   const prods = await productsManager.getProducts();
   // Verifico si existe ese cartito
+  console.log("Carritos: " + JSON.stringify(carts));
   let verifyCart = carts.find((c) => c.id === cartID);
   if (verifyCart) {
     // Verifico si existe ese producto
@@ -92,6 +93,14 @@ cartsRouter.post("/:cid/product/:pid", async (req, res) => {
         };
       }
       // Recorro los carritos y reemplazo
+      let newCarts = [];
+      for (let i = 0; i < carts.length; i++) {
+        if (carts[i].id != verifyCart) {
+          newCarts.push(carts[i]);
+        }
+      }
+      let updateCarts = await cartsManager.addCart(newCarts);
+      return res.send(updateCarts);
     } else {
       return res
         .status(404)
@@ -102,8 +111,6 @@ cartsRouter.post("/:cid/product/:pid", async (req, res) => {
       .status(404)
       .send({ message: `No existe un carrito con ID ${cartID}` });
   }
-
-  res.send("POST ESPECIAL");
 
   //let newCart = await cartsManager.addCart(products);
   //res.send(newCart);
