@@ -3,7 +3,7 @@ import CartManager from "../CartManager.js";
 import ProductManager from "../ProductManager.js";
 
 const cartsManager = new CartManager("./src/Carts.json");
-const productsManager = new ProductManager("./src/Productos.json");
+const productsManager = new ProductManager("./src/Products.json");
 
 const cartsRouter = Router();
 cartsRouter.use(json());
