@@ -92,7 +92,7 @@ class CartManager {
       }
     });
     try {
-      await fs.promises.writeFile("./Carts.json", JSON.stringify(allExceptOne));
+      await fs.promises.writeFile(this.#path, JSON.stringify(allExceptOne));
     } catch (err) {
       console.error(err);
     }

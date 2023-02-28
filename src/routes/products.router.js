@@ -68,4 +68,42 @@ productsRouter.post("/", async (req, res) => {
   res.send(newProd);
 });
 
+productsRouter.post("/:id", async (req, res) => {
+  // Obtengo el valor del elemento
+  let prodID = req.params.id;
+  // Obtengo todos los valores del body
+  const {
+    title,
+    description,
+    code,
+    price,
+    status,
+    stock,
+    category,
+    thumbnails,
+  } = req.body;
+  // Armo los valores actualizados del Producto
+  let updatedProd = await manager.updateProduct(
+    (id = prodID),
+    title,
+    description,
+    code,
+    price,
+    status,
+    stock,
+    category,
+    thumbnails
+  );
+  res.send(updatedProd);
+});
+
+productsRouter.delete("/:id", async (req, res) => {
+  // Obtengo el valor del elemento
+  let prodID = req.params.id;
+  console.log("para borrar: " + prodID);
+  // Armo los valores actualizados del Producto
+  let deletedProd = await manager.deleteProduct(prodID);
+  res.send(deletedProd);
+});
+
 export default productsRouter;

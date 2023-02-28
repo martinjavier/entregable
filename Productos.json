@@ -1,0 +1,35 @@
+[
+  {
+    "id": "01202318416858",
+    "title": "Primero",
+    "description": "Descripción Primera",
+    "code": "abc101",
+    "price": 100,
+    "status": true,
+    "stock": 100,
+    "category": "Primera",
+    "thumbnails": []
+  },
+  {
+    "id": "01202318435129",
+    "title": "Segundo",
+    "description": "Descripción Segunda",
+    "code": "abc102",
+    "price": 200,
+    "status": true,
+    "stock": 200,
+    "category": "Segunda",
+    "thumbnails": []
+  },
+  {
+    "id": "01202318451768",
+    "title": "Tercero",
+    "description": "Descripción Tercera",
+    "code": "abc103",
+    "price": 300,
+    "status": true,
+    "stock": 300,
+    "category": "Tercera",
+    "thumbnails": []
+  }
+]

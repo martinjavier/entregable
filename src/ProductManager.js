@@ -108,26 +108,22 @@ class ProductManager {
   }
 
   async deleteProduct(id) {
-    // defino un arreglo vacío
-    let products = [];
     // llamo al método getProducts
-    const productsPromise = await this.getProducts();
-    // vuelvo a armar mi arreglo
-    productsPromise.forEach((oneProd) => {
-      products.push(oneProd);
-    });
+    const products = await this.getProducts();
+    //console.log("Delete Products: " + JSON.stringify(products));
     // Verifico el campo ID de cada producto existe en el arreglo
     let allExceptOne = [];
     products.forEach((oneProd) => {
-      if (oneProd.id != id) {
+      console.log("oneProd.id: " + oneProd.id);
+      console.log("id: " + id);
+      if (oneProd.id !== id) {
+        console.log("Agregado: " + oneProd.id);
         allExceptOne.push(oneProd);
       }
     });
     try {
-      await fs.promises.writeFile(
-        "./Productos.json",
-        JSON.stringify(allExceptOne)
-      );
+      await fs.promises.writeFile(this.#path, JSON.stringify(allExceptOne));
+      return `Deleted ${id}`;
     } catch (err) {
       console.error(err);
     }
