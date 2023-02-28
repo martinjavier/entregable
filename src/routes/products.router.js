@@ -100,7 +100,6 @@ productsRouter.post("/:id", async (req, res) => {
 productsRouter.delete("/:id", async (req, res) => {
   // Obtengo el valor del elemento
   let prodID = req.params.id;
-  console.log("para borrar: " + prodID);
   // Armo los valores actualizados del Producto
   let deletedProd = await manager.deleteProduct(prodID);
   res.send(deletedProd);

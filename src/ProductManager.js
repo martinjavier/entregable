@@ -114,10 +114,7 @@ class ProductManager {
     // Verifico el campo ID de cada producto existe en el arreglo
     let allExceptOne = [];
     products.forEach((oneProd) => {
-      console.log("oneProd.id: " + oneProd.id);
-      console.log("id: " + id);
       if (oneProd.id !== id) {
-        console.log("Agregado: " + oneProd.id);
         allExceptOne.push(oneProd);
       }
     });
