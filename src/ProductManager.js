@@ -43,8 +43,7 @@ class ProductManager {
         console.error(err);
       }
     } else {
-      //throw new Error(`El código ${code} ya esta registrado.`);
-      console.error(`El código ${code} ya esta registrado.`);
+      throw new Error(`The code ${code} has already been registered.`);
     }
   }
 
@@ -63,7 +62,7 @@ class ProductManager {
     if (verifyProduct) {
       return verifyProduct;
     } else {
-      return `No existe un producto con ID: ${id}`;
+      return `There is not a product with ID: ${id}`;
     }
   }
 
@@ -102,7 +101,7 @@ class ProductManager {
           fs.promises.writeFile(this.#path, JSON.stringify(allButOne));
         }
       } catch (err) {
-        console.error(err);
+        throw new Error(err);
       }
     });
   }
@@ -110,7 +109,6 @@ class ProductManager {
   async deleteProduct(id) {
     // llamo al método getProducts
     const products = await this.getProducts();
-    //console.log("Delete Products: " + JSON.stringify(products));
     // Verifico el campo ID de cada producto existe en el arreglo
     let allExceptOne = [];
     products.forEach((oneProd) => {
