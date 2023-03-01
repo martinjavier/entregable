@@ -44,7 +44,7 @@ cartsRouter.get("/:id", async (req, res) => {
   if (!selected) {
     res
       .status(404)
-      .send({ message: `No existe el carrito con el id ${id + 1}` });
+      .send({ message: `There is not a cart with id ${id + 1}` });
   } else {
     res.send(carts[id]);
   }
@@ -85,12 +85,12 @@ cartsRouter.post("/:cid/product/:pid", async (req, res) => {
     } else {
       return res
         .status(404)
-        .send({ message: `No existe un producto con ID ${prodID}` });
+        .send({ message: `There is not a product ID ${prodID}` });
     }
   } else {
     return res
       .status(404)
-      .send({ message: `No existe un carrito con ID ${cartID}` });
+      .send({ message: `There is not a cart with ID ${cartID}` });
   }
 });
 
