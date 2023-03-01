@@ -41,7 +41,7 @@ class CartManager {
     if (verifyCart) {
       return verifyCart;
     } else {
-      return `No existe un carrito con ID: ${id}`;
+      return `There is not a cart with ID: ${id}`;
     }
   }
 
