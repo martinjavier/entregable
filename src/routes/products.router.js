@@ -31,15 +31,14 @@ productsRouter.get("/", async (req, res) => {
 productsRouter.get("/:id", async (req, res) => {
   // Obtengo el valor del elemento
   let id = req.params.id;
-  // Recupero los productos
-  const products = await manager.getProducts();
-  id = id - 1;
-  let selected = products[id];
-  // Muestro el producto seleccionados
-  if (!selected) {
-    res.status(404).send({ message: `No existe el producto con el id ${id}` });
+  // Recupero el producto
+  const product = await manager.getProductById(id);
+  // Verifico si existe
+  if (product.lenght === 0) {
+    res.status(404).send({ message: `There id no product with id ${id}` });
   } else {
-    res.send(products[id]);
+    // Muestro el producto seleccionado
+    res.send(product);
   }
 });
 

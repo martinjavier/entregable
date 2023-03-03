@@ -36,7 +36,7 @@ class CartManager {
   }
 
   async getCartById(id) {
-    const carts = await this.getProducts();
+    const carts = await this.getCarts();
     let verifyCart = carts.find((c) => c.id === id);
     if (verifyCart) {
       return verifyCart;

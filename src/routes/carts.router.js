@@ -36,17 +36,13 @@ cartsRouter.get("/", async (req, res) => {
 cartsRouter.get("/:id", async (req, res) => {
   // Obtengo el valor del elemento
   let id = req.params.id;
-  // Recupero los productos
-  const carts = await cartsManager.getCarts();
-  id = id - 1;
-  let selected = carts[id];
-  // Muestro el carrito seleccionados
-  if (!selected) {
-    res
-      .status(404)
-      .send({ message: `There is not a cart with id ${id + 1}` });
+  // Recupero el carrito
+  const cart = await cartsManager.getCartById(id);
+  // Verifico el carrito
+  if (cart.length === 0) {
+    res.status(404).send({ message: `There is not a cart with id ${id}` });
   } else {
-    res.send(carts[id]);
+    res.send(cart);
   }
 });
 
